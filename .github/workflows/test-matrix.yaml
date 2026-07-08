@@ -22,13 +22,6 @@ permissions:
 
 jobs:
   test:
-    strategy:
-      matrix:
-        include:
-          - python-version: "3.8"
-          - python-version: "3.14"
-
-    uses: ./.github/workflows/test.yaml
+    uses: bagofseeds/actions/.github/workflows/test-matrix.yaml@bad7219d1cc6280a38fbcffd35ff71314a694bb9
     with:
       tag: ${{ inputs.tag }}
-      python-version: ${{ matrix.python-version }}

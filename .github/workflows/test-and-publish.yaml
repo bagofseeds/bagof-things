@@ -60,68 +60,13 @@ permissions:
   contents: read
 
 jobs:
-  tests:
-    if: inputs.test
-    uses: ./.github/workflows/test-matrix.yaml
+  test-and-publish:
+    uses: bagofseeds/actions/.github/workflows/test-and-publish.yaml@bad7219d1cc6280a38fbcffd35ff71314a694bb9
     with:
       tag: ${{ inputs.tag }}
-
-  publish-testpypi-if-tests:
-    if: ${{ inputs.test && contains(inputs.publish, 'test') }}
-    needs: tests
-    uses: ./.github/workflows/publish-pypi.yaml
-    with:
+      test: ${{ inputs.test }}
+      publish: ${{ inputs.publish }}
       python-version: ${{ inputs.python-version }}
-      tag: ${{ inputs.tag }}
-      test: true
     secrets:
-      password: ${{ secrets.TEST_PYPI_TOKEN }}
-
-  publish-testpypi-always:
-    if: ${{ !inputs.test && contains(inputs.publish, 'test') }}
-    uses: ./.github/workflows/publish-pypi.yaml
-    with:
-      python-version: ${{ inputs.python-version }}
-      tag: ${{ inputs.tag }}
-      test: true
-    secrets:
-      password: ${{ secrets.TEST_PYPI_TOKEN }}
-
-  publish-pypi-if-testpypi-and-tests:
-    if: ${{ inputs.test && contains(inputs.publish, 'pypi') && contains(inputs.publish, 'test') }}
-    needs: publish-testpypi-if-tests
-    uses: ./.github/workflows/publish-pypi.yaml
-    with:
-      python-version: ${{ inputs.python-version }}
-      tag: ${{ inputs.tag }}
-    secrets:
-      password: ${{ secrets.PYPI_TOKEN }}
-
-  publish-pypi-if-tests:
-    if: ${{ inputs.test && contains(inputs.publish, 'pypi') && !contains(inputs.publish, 'test') }}
-    needs: tests
-    uses: ./.github/workflows/publish-pypi.yaml
-    with:
-      python-version: ${{ inputs.python-version }}
-      tag: ${{ inputs.tag }}
-    secrets:
-      password: ${{ secrets.PYPI_TOKEN }}
-
-  publish-pypi-if-testpypi:
-    if: ${{ !inputs.test && contains(inputs.publish, 'pypi') && contains(inputs.publish, 'test') }}
-    needs: publish-testpypi-always
-    uses: ./.github/workflows/publish-pypi.yaml
-    with:
-      python-version: ${{ inputs.python-version }}
-      tag: ${{ inputs.tag }}
-    secrets:
-      password: ${{ secrets.PYPI_TOKEN }}
-
-  publish-pypi-always:
-    if: ${{ !inputs.test && contains(inputs.publish, 'pypi') && !contains(inputs.publish, 'test') }}
-    uses: ./.github/workflows/publish-pypi.yaml
-    with:
-      python-version: ${{ inputs.python-version }}
-      tag: ${{ inputs.tag }}
-    secrets:
-      password: ${{ secrets.PYPI_TOKEN }}
+      PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
+      TEST_PYPI_TOKEN: ${{ secrets.TEST_PYPI_TOKEN }}

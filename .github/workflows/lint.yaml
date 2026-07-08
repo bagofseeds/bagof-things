@@ -29,31 +29,17 @@ permissions:
 
 jobs:
   ruff:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v5
-        with:
-          ref: ${{ inputs.tag }}
-      - name: Setup Python ${{ inputs.python-version }}
-        uses: actions/setup-python@v5
-        with:
-          python-version: ${{ inputs.python-version }}
-      - name: Install ruff
-        run: pip install ruff
-      - name: Ruff check
-        run: ruff check .
+    uses: bagofseeds/actions/.github/workflows/lint.yaml@bad7219d1cc6280a38fbcffd35ff71314a694bb9
+    with:
+      tag: ${{ inputs.tag }}
+      python-version: ${{ inputs.python-version }}
+      requirements-file: requirements-lint.txt
+      lint-command: ruff check .
 
   spellcheck:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v5
-        with:
-          ref: ${{ inputs.tag }}
-      - name: Setup Python ${{ inputs.python-version }}
-        uses: actions/setup-python@v5
-        with:
-          python-version: ${{ inputs.python-version }}
-      - name: Install codespell
-        run: pip install codespell
-      - name: Spellcheck
-        run: codespell .
+    uses: bagofseeds/actions/.github/workflows/lint.yaml@bad7219d1cc6280a38fbcffd35ff71314a694bb9
+    with:
+      tag: ${{ inputs.tag }}
+      python-version: ${{ inputs.python-version }}
+      requirements-file: requirements-lint.txt
+      lint-command: codespell .
