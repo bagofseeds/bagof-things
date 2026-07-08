@@ -8,5 +8,9 @@ This template includes:
 - a `bagof` namespace package under `src/`
 - reusable GitHub Actions for linting, testing, and publishing
 
+The workflow wrappers intentionally track `bagofseeds/actions@main` so
+template-generated repositories inherit shared CI updates without manually
+refreshing pinned workflow SHAs.
+
 When using the template, replace `name` with your project-specific package
 name.
