@@ -4,6 +4,9 @@ on:
   release:
     types: [published]
 
+permissions:
+  contents: read
+
 jobs:
   test-and-publish:
     uses: ./.github/workflows/test-and-publish.yaml

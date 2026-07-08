@@ -23,6 +23,9 @@ on:
       password:
         required: true
 
+permissions:
+  contents: read
+
 jobs:
   publish-pypi:
     runs-on: ubuntu-latest

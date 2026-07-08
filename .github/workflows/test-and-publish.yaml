@@ -56,6 +56,9 @@ on:
       TEST_PYPI_TOKEN:
         required: true
 
+permissions:
+  contents: read
+
 jobs:
   tests:
     if: inputs.test
