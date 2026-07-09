@@ -9,7 +9,7 @@ nav = [
 # Read more: https://zensical.org/docs/setup/basics/#site_name
 site_name = "bagof-things"
 
-site_description = "A template repository for usefule things in a bag."
+site_description = "A template repository for useful things in a bag."
 
 # The site_author attribute. This is used in the HTML head element.
 #
