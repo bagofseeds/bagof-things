@@ -1,4 +1,4 @@
-# bagof-repo-template
+# bagof-things
 
 Template repository for `bagof` Python projects.
 
