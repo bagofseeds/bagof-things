@@ -20,6 +20,7 @@ site_description = "A template repository for useful things in a bag."
 site_author = "Yael Balbastre"
 
 site_url = "https://bagofseeds.github.io/bagof-things/"
+repo_url = "https://github.com/bagofseeds/bagof-things"
 
 copyright = """
 Copyright &copy; 2026 The authors
